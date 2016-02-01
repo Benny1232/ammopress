@@ -105,15 +105,11 @@ var AmmoPress = function(){
 			return false;
 		}
 
-		var jacket = this.popJacket();
-		var primer = this.popPrimer();
-		var powder = this.popPowder();
-		var bullet = this.popBullet();
-		var round = jacket;
-		round.primer = primer;
-		round.powder = powder;
-		round.bullet = bullet;
-		cb(null, "success!");
+		var round = this.popJacket();
+		round.primer = this.popPrimer();
+		round.powder = this.popPowder();
+		round.bullet = this.popBullet();
+		cb(null, round);
 
 	};
 
@@ -130,34 +126,61 @@ var myPress = new AmmoPress();
 
 console.log('jackets...');
 // STEP 1: load jackets into jackets queue
-myPress.loadJackets({foo: 'bar'}, 2);
-myPress.loadJackets({test: 'ing'}, 5);
+myPress.loadJackets({foo: 'bar'}, 1);
+myPress.loadJackets({test: 'ing'}, 2);
 console.log(myPress.listJackets());
 
 console.log('primers...');
-myPress.loadPrimers({p: 'pri1'}, 2);
-myPress.loadPrimers({p2: 'pri2'}, 5);
+myPress.loadPrimers({p: 'pri1'}, 1);
+myPress.loadPrimers({p2: 'pri2'}, 2);
 console.log(myPress.listPrimers());
 
 console.log('powder...');
-myPress.loadPowder({p: 'pow1'}, 2);
-myPress.loadPowder({p2: 'pow2'}, 5);
+myPress.loadPowder({p: 'pow1'}, 1);
+myPress.loadPowder({p2: 'pow2'}, 2);
 console.log(myPress.listPowder());
 
 console.log('bullets...');
-myPress.loadBullets({p: 'pew1'}, 2);
-myPress.loadBullets({p2: 'pew2'}, 5);
+myPress.loadBullets({p: 'pew1'}, 1);
+myPress.loadBullets({p2: 'pew2'}, 2);
 console.log(myPress.listBullets());
 
-/*
+
 // STEP 2: pull handle to press a around
-myPress.pullHandle(function(err, results){
+myPress.pullHandle(function(err, round){
 	if(err){
 		console.log('errors..');
 		console.log(err);
 	} else {
-		console.log('results..');
-		console.log(results);
+		console.log('finished round..');
+		console.log(JSON.stringify(round, null, 2));
 	}
 });
-*/
+
+myPress.pullHandle(function(err, round){
+	if(err){
+		console.log('errors..');
+		console.log(err);
+	} else {
+		console.log('finished round..');
+		console.log(JSON.stringify(round, null, 2));
+	}
+});
+myPress.pullHandle(function(err, round){
+	if(err){
+		console.log('errors..');
+		console.log(err);
+	} else {
+		console.log('finished round..');
+		console.log(JSON.stringify(round, null, 2));
+	}
+});
+myPress.pullHandle(function(err, round){
+	if(err){
+		console.log('errors..');
+		console.log(err);
+	} else {
+		console.log('finished round..');
+		console.log(JSON.stringify(round, null, 2));
+	}
+});
