@@ -1,3 +1,4 @@
+var roundVal = require('./roundval');
 var AmmoPress = function(){
 
 	var jackets = [],
@@ -91,6 +92,8 @@ var AmmoPress = function(){
 	};
 	
 // ===============================================
+// ===============================================
+
 
 	// press rounds
 	this.pullHandle = function(cb){
@@ -109,7 +112,14 @@ var AmmoPress = function(){
 		round.primer = this.popPrimer();
 		round.powder = this.popPowder();
 		round.bullet = this.popBullet();
-		cb(null, round);
+		
+		var roundInfo = roundVal(round);
+		if(!roundInfo){
+			cb('bad round', false);
+			return false;
+		}
+
+		cb(null, {round: round, roundInfo: roundInfo});
 
 	};
 
@@ -136,13 +146,17 @@ myPress.loadPrimers({p2: 'pri2'}, 2);
 console.log(myPress.listPrimers());
 
 console.log('powder...');
-myPress.loadPowder({p: 'pow1'}, 1);
-myPress.loadPowder({p2: 'pow2'}, 2);
+myPress.loadPowder({p: 'pow1', amount: 22}, 1);
+myPress.loadPowder({p2: 'pow2', amount: 65}, 2);
 console.log(myPress.listPowder());
 
 console.log('bullets...');
-myPress.loadBullets({p: 'pew1'}, 1);
-myPress.loadBullets({p2: 'pew2'}, 2);
+myPress.loadBullets({p: 'pew1', diameter: 9}, 1);		// 9mm 
+myPress.loadBullets({p2: 'pew2', diameter: 5.56}, 2);	// 556 mm
+myPress.loadBullets({p2: 'pew2', diameter: 5.588}, 2);	// 22 cal
+myPress.loadBullets({p2: 'pew2', diameter: 11.43}, 2);	// 45 cal
+myPress.loadBullets({p2: 'pew2', diameter: 4}, 2);	// unknown
+myPress.loadBullets({p2: 'pew2', diameter: 12.7}, 2);	// 50 cal
 console.log(myPress.listBullets());
 
 
