@@ -159,7 +159,7 @@ myPress.loadBullets({p2: 'pew2', diameter: 4}, 2);	// unknown
 myPress.loadBullets({p2: 'pew2', diameter: 12.7}, 2);	// 50 cal
 console.log(myPress.listBullets());
 
-
+/*
 // STEP 2: pull handle to press a around
 myPress.pullHandle(function(err, round){
 	if(err){
@@ -189,6 +189,7 @@ myPress.pullHandle(function(err, round){
 		console.log(JSON.stringify(round, null, 2));
 	}
 });
+*/
 myPress.pullHandle(function(err, round){
 	if(err){
 		console.log('errors..');
